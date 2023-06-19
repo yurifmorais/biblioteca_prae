@@ -3,6 +3,7 @@ package biblioteca.prae.api.controller;
 //ResponseEntity eh uma boa pratica para retornar os codigos corretos; ex: codigo 201 = created (usado no POST);
 
 import biblioteca.prae.api.domain.livro.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("livros")//url inicial
+@SecurityRequirement(name = "bearer-key")
 public class LivroController {
     @Autowired //injecao de dependencias
     private LivroRepository repository;

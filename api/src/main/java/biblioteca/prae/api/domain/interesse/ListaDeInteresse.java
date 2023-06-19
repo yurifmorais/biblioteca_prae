@@ -21,7 +21,7 @@ public class ListaDeInteresse {
     private LivroRepository livroRepository;
 
     //a lista de interesse vai fazer algo de reservar?
-    public void adicionarALista(DadosInteresse dados){
+    public DadosDetalhamentoInteresse adicionarALista(DadosInteresse dados){
         if(!usuarioRepository.existsById(dados.idUsuario())){
             //se o id do usuario nao existir no meu bd
             throw new ValidacaoException("ID do usuario informado nao existe!");
@@ -39,6 +39,8 @@ public class ListaDeInteresse {
 
         var interesse = new Interesse(null, usuario, livro);
         interesseRepository.save(interesse);
+
+        return new DadosDetalhamentoInteresse(interesse);
     }
 
     public void cancelar(DadosCancelamentoInteresse dados) {
