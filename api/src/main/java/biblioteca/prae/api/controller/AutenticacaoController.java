@@ -38,27 +38,3 @@ public class AutenticacaoController {
         }
     }
 }
-
-
-
-
-//@RestController
-//@RequestMapping("/login")
-//public class AutenticacaoController {
-//    @Autowired //injecao de dependencia o spring vai fazer
-//    private AuthenticationManager manager; //classe que o proprio spring usa pra fazer a autenticacao
-//
-//    @Autowired
-//    private TokenService tokenService;
-//
-//    @PostMapping
-//    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
-//
-//        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.email(), dados.senha());
-//        var authentication = manager.authenticate(authenticationToken);
-//
-//        //o usuario esta dentro da variavel authentication, ai so pego ele e faco o cast
-//        var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
-//        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
-//    }
-//}

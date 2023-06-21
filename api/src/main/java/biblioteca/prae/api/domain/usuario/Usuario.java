@@ -30,6 +30,14 @@ public class Usuario implements UserDetails {
     private String email;
     private String senha;
 
+    public Usuario(DadosCadastroUsuario dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.senha = dados.senha();
+        this.creditos = 0;
+        this.pontuacao = 0;
+    }
+
     //os metodos abaixos sao gerados automaticamente pois a classe usuario implementa UserDetails
 
     @Override //esse metodo representa os controles de perfis que existe. PRECISO IMPLEMENTAR ISSO

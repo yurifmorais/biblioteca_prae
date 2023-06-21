@@ -10,4 +10,4 @@ public class ApiApplication {
 	}
 }
 
-//prox passo: criar a estrutura para o CRUD do livro funcionar
+//prox passo: criar crud com o historico de trocas
