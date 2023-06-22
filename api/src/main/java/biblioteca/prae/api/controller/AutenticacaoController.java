@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class AutenticacaoController {
     @Autowired
-    private AuthenticationManager manager; //classe que o proprio spring usa pra fazer a autenticacao
+    private AuthenticationManager manager;
 
     @Autowired
     private TokenService tokenService;

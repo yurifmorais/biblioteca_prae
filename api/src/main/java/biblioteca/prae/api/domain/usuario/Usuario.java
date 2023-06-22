@@ -50,6 +50,10 @@ public class Usuario implements UserDetails {
         return senha;
     }
 
+    public void setPassword(String novaSenha) {
+        this.senha = novaSenha;
+    }
+
     @Override
     public String getUsername() {
         return email;
