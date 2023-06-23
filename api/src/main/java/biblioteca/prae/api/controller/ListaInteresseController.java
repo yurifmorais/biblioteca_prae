@@ -1,17 +1,19 @@
 package biblioteca.prae.api.controller;
 
-import biblioteca.prae.api.domain.interesse.DadosCancelamentoInteresse;
-import biblioteca.prae.api.domain.interesse.DadosDetalhamentoInteresse;
 import biblioteca.prae.api.domain.interesse.DadosInteresse;
+import biblioteca.prae.api.domain.interesse.InteresseRepository;
 import biblioteca.prae.api.domain.interesse.ListaDeInteresse;
+import biblioteca.prae.api.domain.livro.DadosListagemLivro;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//preciso verificar para nao duplicar o livro na lista de interesse
 @RestController
 @RequestMapping("listainteresse")
 @SecurityRequirement(name = "bearer-key")
@@ -19,6 +21,9 @@ public class ListaInteresseController {
 
     @Autowired
     private ListaDeInteresse interesse;
+
+    @Autowired
+    private InteresseRepository interesseRepository;
 
     @PostMapping
     @Transactional
@@ -28,12 +33,5 @@ public class ListaInteresseController {
 
         var dto = interesse.adicionarALista(dados); //o controller nao deve ter regras de negocio
         return ResponseEntity.ok(dto);
-    }
-
-    @DeleteMapping
-    @Transactional
-    public ResponseEntity cancelarInteresse(@RequestBody @Valid DadosCancelamentoInteresse dados) {
-        interesse.cancelar(dados);
-        return ResponseEntity.noContent().build();
     }
 }

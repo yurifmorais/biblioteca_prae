@@ -8,24 +8,23 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "interesses")
+@Table(name = "listainteresse")
 @Entity(name = "Interesse")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")//pk
-
+@EqualsAndHashCode(of = {"usuario", "livro"})
+@IdClass(InteresseId.class)
 public class Interesse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "livro_id")
     private Livro livro;
+
 }

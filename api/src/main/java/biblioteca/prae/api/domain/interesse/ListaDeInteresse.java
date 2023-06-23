@@ -1,17 +1,12 @@
 package biblioteca.prae.api.domain.interesse;
-
-
-
 import biblioteca.prae.api.domain.ValidacaoException;
 import biblioteca.prae.api.domain.livro.LivroRepository;
 import biblioteca.prae.api.domain.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//aqui vou colocar as regras de negocio e validadoces
 @Service
 public class ListaDeInteresse {
-
 
     @Autowired
     private InteresseRepository interesseRepository;
@@ -37,17 +32,9 @@ public class ListaDeInteresse {
         var usuario = usuarioRepository.getReferenceById(dados.idUsuario());
         var livro = livroRepository.getReferenceById(dados.idLivro());
 
-        var interesse = new Interesse(null, usuario, livro);
+        var interesse = new Interesse(usuario, livro);
         interesseRepository.save(interesse);
 
         return new DadosDetalhamentoInteresse(interesse);
-    }
-
-    public void cancelar(DadosCancelamentoInteresse dados) {
-        //revisar esse metodo
-        if (!livroRepository.existsById(dados.idInteresse())) {
-            throw new ValidacaoException("Id do Interesse informado não existe!");
-        }
-        var interesse = interesseRepository.getReferenceById(dados.idInteresse());
     }
 }
