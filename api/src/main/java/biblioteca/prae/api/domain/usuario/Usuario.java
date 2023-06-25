@@ -54,6 +54,12 @@ public class Usuario implements UserDetails {
         this.senha = novaSenha;
     }
 
+    //teste abaixo
+    public Long getId() {
+        return this.id;
+    }
+    //teste acima
+
     @Override
     public String getUsername() {
         return email;

@@ -1,6 +1,7 @@
 package biblioteca.prae.api.controller;
 import biblioteca.prae.api.domain.usuario.DadosAutenticacao;
 import biblioteca.prae.api.domain.usuario.Usuario;
+import biblioteca.prae.api.domain.usuario.UsuarioRepository;
 import biblioteca.prae.api.infra.security.DadosTokenJWT;
 import biblioteca.prae.api.infra.security.TokenService;
 import jakarta.validation.Valid;
@@ -17,6 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/login")
 public class AutenticacaoController {
+
+    //teste abaixo
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    //teste acima
     @Autowired
     private AuthenticationManager manager;
 
@@ -28,10 +34,9 @@ public class AutenticacaoController {
         try {
             var authenticationToken = new UsernamePasswordAuthenticationToken(dados.email(), dados.senha());
             var authentication = manager.authenticate(authenticationToken);
-
             var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 
-            return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
+            return ResponseEntity.ok(new DadosTokenJWT(tokenJWT, dados.email()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
