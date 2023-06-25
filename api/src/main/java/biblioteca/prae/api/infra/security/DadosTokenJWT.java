@@ -8,5 +8,5 @@ package biblioteca.prae.api.infra.security;
 
 //teste abaixo
 //para devolver o token como um JSON
-public record DadosTokenJWT(String token, String email) {
+public record DadosTokenJWT(String token, String email, String nome, Long id) {
 }

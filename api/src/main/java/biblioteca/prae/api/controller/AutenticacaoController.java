@@ -18,14 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/login")
 public class AutenticacaoController {
-
-    //teste abaixo
     @Autowired
-    private UsuarioRepository usuarioRepository;
-    //teste acima
+    private UsuarioRepository usuarioRepository; //testeeee
     @Autowired
     private AuthenticationManager manager;
-
     @Autowired
     private TokenService tokenService;
 
@@ -36,7 +32,8 @@ public class AutenticacaoController {
             var authentication = manager.authenticate(authenticationToken);
             var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 
-            return ResponseEntity.ok(new DadosTokenJWT(tokenJWT, dados.email()));
+            Usuario usuario = (Usuario) usuarioRepository.findByEmail(dados.email());
+            return ResponseEntity.ok(new DadosTokenJWT(tokenJWT, dados.email(), usuario.getNome(), usuario.getId()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -49,16 +49,9 @@ public class Usuario implements UserDetails {
     public String getPassword() {
         return senha;
     }
-
     public void setPassword(String novaSenha) {
         this.senha = novaSenha;
     }
-
-    //teste abaixo
-    public Long getId() {
-        return this.id;
-    }
-    //teste acima
 
     @Override
     public String getUsername() {
