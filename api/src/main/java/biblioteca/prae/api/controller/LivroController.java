@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("livros")//url inicial
 @SecurityRequirement(name = "bearer-key")
@@ -30,11 +33,20 @@ public class LivroController {
         return ResponseEntity.created(uri).body(new DadosDetalhamentoLivro(livro));
     }
 
+//    @GetMapping
+//    public ResponseEntity<Page<DadosListagemLivro>> listar(@PageableDefault(size = 10, sort = {"titulo"}) Pageable paginacao) {
+//        var page = repository.findAllByDisponivelTrue(paginacao).map(DadosListagemLivro::new);
+//        return ResponseEntity.ok(page);
+//    }
+    //teste abaixo
     @GetMapping
-    public ResponseEntity<Page<DadosListagemLivro>> listar(@PageableDefault(size = 10, sort = {"titulo"}) Pageable paginacao) {
-        var page = repository.findAllByDisponivelTrue(paginacao).map(DadosListagemLivro::new);
-        return ResponseEntity.ok(page);
+    public ResponseEntity<List<DadosListagemLivro>> listar(Pageable paginacao) {
+        var livros = repository.findAllByDisponivelTrue(paginacao).stream()
+                .map(DadosListagemLivro::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(livros);
     }
+    //teste acima
 
     @PutMapping
     @Transactional

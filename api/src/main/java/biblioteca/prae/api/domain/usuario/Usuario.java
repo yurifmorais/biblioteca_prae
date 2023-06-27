@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class Usuario implements UserDetails {
     private long pontuacao;
     private String email;
     private String senha;
+    @ElementCollection
+    private List<Long> favoritos;
 
     public Usuario(DadosCadastroUsuario dados) {
         this.nome = dados.nome();
@@ -36,11 +39,10 @@ public class Usuario implements UserDetails {
         this.senha = dados.senha();
         this.creditos = 0;
         this.pontuacao = 0;
+        this.favoritos = new ArrayList<>();
     }
 
-    //os metodos abaixos sao gerados automaticamente pois a classe usuario implementa UserDetails
-
-    @Override //esse metodo representa os controles de perfis que existe. PRECISO IMPLEMENTAR ISSO
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }

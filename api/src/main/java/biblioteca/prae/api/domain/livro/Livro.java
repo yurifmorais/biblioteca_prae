@@ -26,7 +26,7 @@ public class Livro {
     private String titulo;
     private String autor;
     private Blob foto;
-    @Enumerated(EnumType.STRING)//para identificar que e um ENUM
+    @Enumerated(EnumType.STRING)
     private Genero genero;
     private boolean disponivel;
     private int quantidade;
