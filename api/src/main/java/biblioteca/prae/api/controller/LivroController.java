@@ -40,11 +40,10 @@ public class LivroController {
 //    }
     //teste abaixo
     @GetMapping
-    public ResponseEntity<List<DadosListagemLivro>> listar(Pageable paginacao) {
-        var livros = repository.findAllByDisponivelTrue(paginacao).stream()
-                .map(DadosListagemLivro::new)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(livros);
+    public ResponseEntity<Page<DadosListagemLivro>> listar(Pageable paginacao) {
+        //var livros = repository.findAllByDisponivelTrue(paginacao).stream().map(DadosListagemLivro::new).collect(Collectors.toList());
+        var page = repository.findAllByDisponivelTrue(paginacao).map(DadosListagemLivro::new);
+        return ResponseEntity.ok(page);
     }
     //teste acima
 
