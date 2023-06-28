@@ -25,7 +25,7 @@ public class Livro {
     private Long id;
     private String titulo;
     private String autor;
-    private Blob foto;
+    private String foto;
     @Enumerated(EnumType.STRING)
     private Genero genero;
     private boolean disponivel;
@@ -34,11 +34,12 @@ public class Livro {
     public Livro(DadosCadastroLivro dados) {
         this.titulo = dados.titulo();
         this.autor = dados.autor();
-        this.foto = dados.foto();
         this.genero = dados.genero();
+        this.foto = dados.foto();
         this.disponivel = true;
         this.quantidade = dados.quantidade();
     }
+
 
     public void atualizarInformacoes(DadosAtualizacaoLivro dados) {
         if (dados.titulo() != null) {

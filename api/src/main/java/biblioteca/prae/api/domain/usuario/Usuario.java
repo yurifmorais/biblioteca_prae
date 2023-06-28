@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")//pk
+@EqualsAndHashCode(of = "id")
 
 public class Usuario implements UserDetails {
 
@@ -33,6 +33,9 @@ public class Usuario implements UserDetails {
     @ElementCollection
     private List<Long> favoritos;
 
+    @Column(name = "is_admin")
+    private boolean isAdmin;
+
     public Usuario(DadosCadastroUsuario dados) {
         this.nome = dados.nome();
         this.email = dados.email();
@@ -40,17 +43,23 @@ public class Usuario implements UserDetails {
         this.creditos = 0;
         this.pontuacao = 0;
         this.favoritos = new ArrayList<>();
+        this.isAdmin = false; //verificar
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if (isAdmin) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
     @Override
     public String getPassword() {
         return senha;
     }
+
     public void setPassword(String novaSenha) {
         this.senha = novaSenha;
     }
@@ -78,5 +87,9 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

@@ -3,7 +3,7 @@ CREATE TABLE livros (
   titulo VARCHAR(255) NOT NULL,
   autor VARCHAR(255) NOT NULL,
   genero VARCHAR(255) NOT NULL,
-  foto BLOB,
+  foto VARCHAR(255),
   disponivel BOOLEAN NOT NULL,
   quantidade INT NOT NULL
 );

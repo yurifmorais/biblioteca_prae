@@ -5,5 +5,6 @@ CREATE TABLE usuarios (
   senha VARCHAR(255) NOT NULL,
   creditos INT NOT NULL,
   pontuacao INT NOT NULL,
+  is_admin BOOLEAN,
   favoritos JSON
 );

@@ -12,7 +12,7 @@ public record DadosCadastroLivro(
         String autor,
         @NotNull
         Genero genero,
-        Blob foto,
+        String foto,
         @NotNull
         int quantidade
 ) {

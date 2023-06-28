@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,11 +25,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfigurations {
 
     //a req do tipo POST de login e a unica liberada pra qualquer usuario. qualquer outra requisicao tem que estar autenticado
     //e importante eu determinar a ordem dos filtros, pois o spring tambem aplica filtros!!!
-    //talvez seja aqui q eu configure o acesso do crud
 
     @Autowired
     private SecurityFilter securityFilter;
