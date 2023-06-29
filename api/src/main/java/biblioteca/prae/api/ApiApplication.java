@@ -9,5 +9,3 @@ public class ApiApplication {
 		SpringApplication.run(ApiApplication.class, args);
 	}
 }
-
-//prox passo: criar crud com o historico de trocas
