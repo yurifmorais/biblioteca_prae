@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequestMapping("livros")
 @SecurityRequirement(name = "bearer-key")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 
 public class LivroController {
     @Autowired //injecao de dependencias
@@ -22,6 +22,7 @@ public class LivroController {
 
     @PostMapping
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroLivro dados, UriComponentsBuilder uriBuilder) {
         var livro = new Livro(dados);
         repository.save(livro); //o save eh como se fosse um INSERT no bd
@@ -38,12 +39,14 @@ public class LivroController {
 
     @PutMapping
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoLivro dados) {
         var livro = repository.getReferenceById(dados.id());
         livro.atualizarInformacoes(dados);
         return ResponseEntity.ok(new DadosDetalhamentoLivro(livro));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")//o ID eh recebido como parametro dinamico, vem pela URL
     @Transactional
     public ResponseEntity excluir(@PathVariable Long id) {//@PathVariable serve para dizer que é o parametro que vem da URL
@@ -51,7 +54,7 @@ public class LivroController {
         livro.excluir();
         return ResponseEntity.noContent().build();
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {
         var livro = repository.getReferenceById(id);
