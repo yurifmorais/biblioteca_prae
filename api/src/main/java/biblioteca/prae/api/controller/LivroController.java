@@ -54,7 +54,7 @@ public class LivroController {
         livro.excluir();
         return ResponseEntity.noContent().build();
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {
         var livro = repository.getReferenceById(id);

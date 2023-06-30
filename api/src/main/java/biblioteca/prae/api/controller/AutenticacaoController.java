@@ -33,7 +33,7 @@ public class AutenticacaoController {
             var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 
             Usuario usuario = (Usuario) usuarioRepository.findByEmail(dados.email());
-            return ResponseEntity.ok(new DadosTokenJWT(tokenJWT, dados.email(), usuario.getNome(), usuario.getId()));
+            return ResponseEntity.ok(new DadosTokenJWT(tokenJWT, dados.email(), usuario.getNome(), usuario.getId(), usuario.isAdmin()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());

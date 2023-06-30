@@ -4,12 +4,16 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
+//dados que vou receber do front
 public record DadosTroca(
+//        @NotNull
+//        Long usuarioId,
         @NotNull
-        Long usuarioId,
+        String emailUsuario,
         @NotNull
         Long livroEntradaId,
-        @NotNull Long livroSaidaId,
+        @NotNull
+        Long livroSaidaId,
         LocalDateTime data
 ) {
 }

@@ -1,12 +1,7 @@
 package biblioteca.prae.api.domain.historico;
 
-import biblioteca.prae.api.domain.livro.Genero;
-import biblioteca.prae.api.domain.livro.Livro;
-import biblioteca.prae.api.domain.usuario.Usuario;
-
-public record DadosListagemTroca(Long id, Usuario usuarioId, Livro livroEntrada, Livro LivroSaida) {
+public record DadosListagemTroca(Long id, Long idUsario, String nomeUsuario, String emailUsuario, Long idLivroEntrada, String livroEntrada, String livroSaida, Long idLivroSaida) {
     public DadosListagemTroca(Troca troca) {
-        this(troca.getId(), troca.getUsuario(), troca.getLivroEntrada(), troca.getLivroSaida());
+        this(troca.getId(), troca.getUsuario().getId(), troca.getUsuario().getNome(),  troca.getUsuario().getEmail(), troca.getLivroEntrada().getId(), troca.getLivroEntrada().getTitulo(), troca.getLivroSaida().getTitulo(), troca.getLivroSaida().getId());
     }
 }
-
