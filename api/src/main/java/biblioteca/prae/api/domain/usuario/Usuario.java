@@ -43,7 +43,7 @@ public class Usuario implements UserDetails {
         this.creditos = 0;
         this.pontuacao = 0;
         this.favoritos = new ArrayList<>();
-        this.isAdmin = false; //verificar
+        this.isAdmin = false;
     }
 
     @Override
@@ -91,5 +91,8 @@ public class Usuario implements UserDetails {
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+    public void setPontuacao() {
+        this.pontuacao += 100;
     }
 }

@@ -15,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("livros")
 @SecurityRequirement(name = "bearer-key")
 
-
 public class LivroController {
     @Autowired //injecao de dependencias
     private LivroRepository repository;
