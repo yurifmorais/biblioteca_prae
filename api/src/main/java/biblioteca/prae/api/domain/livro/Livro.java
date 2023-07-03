@@ -1,7 +1,6 @@
 package biblioteca.prae.api.domain.livro;
 
 //entidade JPA para representar a tabela LIVRO do BD.
-//tem os mesmos atributos que declarei no record DadosCadastroMedico
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

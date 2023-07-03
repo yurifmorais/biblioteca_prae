@@ -32,34 +32,4 @@ public class RankingController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(ranking);
     }
-
-//    @GetMapping("/{email}/classificacao")
-//    public ResponseEntity<?> getClassificacao(@PathVariable String email) {
-//        List<Usuario> usuarios = usuarioRepository.findAll(Sort.by(Sort.Direction.DESC, "pontuacao"));
-//        int classificacao = 1;
-//        for (Usuario usuario : usuarios) {
-//            if (usuario.getEmail().equals(email)) {
-//                return ResponseEntity.ok(Map.of("classificacao", classificacao));
-//            }
-//            classificacao++;
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
-
-    @GetMapping("/{email}/classificacao")
-    public ResponseEntity<?> getClassificacao(@PathVariable String email) {
-        List<Usuario> usuarios = usuarioRepository.findAll(Sort.by(Sort.Direction.DESC, "pontuacao"));
-        int classificacao = 1;
-        for (Usuario usuario : usuarios) {
-            if (usuario.getEmail().equals(email)) {
-                return ResponseEntity.ok(Map.of(
-                        "classificacao", classificacao,
-                        "pontuacao", usuario.getPontuacao()
-                ));
-            }
-            classificacao++;
-        }
-        return ResponseEntity.notFound().build();
-    }
-
 }

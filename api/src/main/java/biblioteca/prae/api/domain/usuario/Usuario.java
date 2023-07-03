@@ -92,6 +92,11 @@ public class Usuario implements UserDetails {
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+    public Long getPontuacao(){
+        return this.pontuacao;
+    }
+
     public void setPontuacao() {
         this.pontuacao += 100;
     }
