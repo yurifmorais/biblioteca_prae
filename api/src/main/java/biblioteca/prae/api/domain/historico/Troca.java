@@ -5,11 +5,9 @@ import biblioteca.prae.api.domain.usuario.Usuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
-
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-
 
 @Table(name = "troca")
 @Entity(name = "Troca")
@@ -30,7 +28,7 @@ public class Troca {
     @ManyToOne
     private Livro livroEntrada;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Livro livroSaida;
 
     private LocalDateTime data;
@@ -42,4 +40,7 @@ public class Troca {
         this.data = data;
     }
 
+    public boolean usuarioRetirouLivro() {
+        return livroSaida != null;
+    }
 }

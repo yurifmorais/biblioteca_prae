@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     UserDetails findByEmail(String username);
+
     @Query("SELECT u.favoritos FROM Usuario u WHERE u.id = :id")
     List<Long> findFavoritosById(@Param("id") Long id);
 
-    //teste abaixo
     Optional<Usuario> findById(Long id);
 }

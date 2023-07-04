@@ -1,4 +1,5 @@
 package biblioteca.prae.api.controller;
+
 import biblioteca.prae.api.domain.livro.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
@@ -16,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @SecurityRequirement(name = "bearer-key")
 
 public class LivroController {
-    @Autowired //injecao de dependencias
+    @Autowired
     private LivroRepository repository;
 
     @PostMapping
@@ -31,7 +32,6 @@ public class LivroController {
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemLivro>> listar(Pageable paginacao) {
-        //var livros = repository.findAllByDisponivelTrue(paginacao).stream().map(DadosListagemLivro::new).collect(Collectors.toList());
         var page = repository.findAllByDisponivelTrue(paginacao).map(DadosListagemLivro::new);
         return ResponseEntity.ok(page);
     }

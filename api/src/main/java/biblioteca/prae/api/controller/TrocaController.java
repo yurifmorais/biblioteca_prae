@@ -37,6 +37,11 @@ public class TrocaController {
         return ResponseEntity.ok(page);
     }
 
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        trocaRepository.deleteById(id);
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity adicionar(@RequestBody DadosTroca dadosTroca, UriComponentsBuilder uriBuilder) {
@@ -44,15 +49,21 @@ public class TrocaController {
         usuario.setPontuacao();
         Livro livroEntrada = livroRepository.findById(dadosTroca.livroEntradaId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro de entrada não encontrado"));
-        Livro livroSaida = livroRepository.findById(dadosTroca.livroSaidaId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro de saída não encontrado"));
+        Livro livroSaida = null;
+        if (dadosTroca.livroSaidaId() != null) {
+            livroSaida = livroRepository.findById(dadosTroca.livroSaidaId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro de saída não encontrado"));
+        }
         Troca troca = new Troca(usuario, livroEntrada, livroSaida, dadosTroca.data());
         trocaRepository.save(troca);
+
+        // Verifica se o usuário retirou um livro ou pegou créditos
+        if (!troca.usuarioRetirouLivro()) {
+            usuario.setCreditos();
+        }
+
         return ResponseEntity.ok(new DadosDetalhamentoTroca(troca));
     }
 
-    @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        trocaRepository.deleteById(id);
-    }
+
 }

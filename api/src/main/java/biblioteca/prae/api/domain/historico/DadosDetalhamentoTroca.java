@@ -1,10 +1,13 @@
 package biblioteca.prae.api.domain.historico;
 
-import biblioteca.prae.api.domain.livro.Genero;
-import biblioteca.prae.api.domain.livro.Livro;
-
-public record DadosDetalhamentoTroca(Long id, Long usuarioID, Long livroEntradaID, Long livroSaidaID) {
+public record DadosDetalhamentoTroca(Long id, Long usuarioID, String email, Long livroEntradaID, Long livroSaidaID) {
     public DadosDetalhamentoTroca(Troca troca) {
-        this(troca.getId(), troca.getUsuario().getId(), troca.getLivroEntrada().getId(), troca.getLivroSaida().getId());
+        this(
+                troca.getId(),
+                troca.getUsuario().getId(),
+                troca.getUsuario().getEmail(),
+                troca.getLivroEntrada().getId(),
+                troca.getLivroSaida() != null ? troca.getLivroSaida().getId() : null
+        );
     }
 }

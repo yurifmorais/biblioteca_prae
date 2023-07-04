@@ -14,21 +14,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-//implementar creditos - entra com o email do usuario e com o numero de creditos
-//JWT -> json web token
 
-//sobre o ranking, adicionar a posicao e  o nome do ranking
-
-//na troca, verificar se entrou outro livro. se nao entrou outro livro, vai adicionar credito ao usuario.
-//boolean pegouLivro. vou mandar o livro de saida como opcional
-
-//na parte da troca, receber o email ao inves do ID o usuario
 @RestController
 @RequestMapping("/login")
 public class AutenticacaoController {
     @Autowired
-    private UsuarioRepository usuarioRepository; //testeeee
+    private UsuarioRepository usuarioRepository;
     @Autowired
     private AuthenticationManager manager;
     @Autowired
@@ -57,6 +48,4 @@ public class AutenticacaoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
-
 }

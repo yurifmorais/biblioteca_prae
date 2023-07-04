@@ -1,15 +1,10 @@
 package biblioteca.prae.api.domain.livro;
-
-//entidade JPA para representar a tabela LIVRO do BD.
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Blob;
 
 @Table(name = "livros")
 @Entity(name = "Livro")
@@ -39,7 +34,6 @@ public class Livro {
         this.quantidade = dados.quantidade();
     }
 
-
     public void atualizarInformacoes(DadosAtualizacaoLivro dados) {
         if (dados.titulo() != null) {
             this.titulo = dados.titulo();
@@ -52,7 +46,6 @@ public class Livro {
         }
     }
 
-    //exclusao logica em que eu so desativo o livro
     public void excluir() {
         this.disponivel = false;
     }

@@ -100,4 +100,7 @@ public class Usuario implements UserDetails {
     public void setPontuacao() {
         this.pontuacao += 100;
     }
+    public void setCreditos() {
+        this.creditos += 1;
+    }
 }
